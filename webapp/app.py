@@ -20,7 +20,7 @@ dict1={0:b'\xe0\xb2\x85',1:b'\xe0\xb2\x86',2:b'\xe0\xb2\x87',3:b'\xe0\xb2\x88',4
        41:b'\xe0\xb2\xaf',42:b'\xe0\xb2\xb0',43:b'\xe0\xb2\xb2',44:b'\xe0\xb2\xb3',45:b'\xe0\xb2\xb5',
        46:b'\xe0\xb2\xb6',47:b'\xe0\xb2\xb7',48:b'\xe0\xb2\xb8',49:b'\xe0\xb2\xb9'}
 
-model=tf.keras.models.load_model("finalmodel.h5")
+model=tf.keras.models.load_model("webapp/finalmodel.h5")
 chars = []
 @app.route("/", methods=["POST", "GET"])
 def home(): 
@@ -39,7 +39,7 @@ def home():
 
 
             image.thumbnail([250, 250], Im.ANTIALIAS)
-            IMG_PATH = 'static/img/'
+            IMG_PATH = 'webapp/static/img/'
             #Store the image
             folders = os.listdir(IMG_PATH)
             img_name = '' 
@@ -50,9 +50,9 @@ def home():
                 temp = os.listdir(IMG_PATH + 'appimgs/')
                 img_name = str(len(temp) + 1)
             IMG_DEST_PATH = os.path.join(IMG_PATH,'appimgs')
-            image.save(IMG_DEST_PATH +"\\"+ img_name + '.png')
-            image_path = (IMG_DEST_PATH +"\\"+ img_name + '.png')
-            img = cv2.imread(image_path)
+            IMG_FULL_PATH = os.path.join(IMG_DEST_PATH,(img_name + '.png'))
+            image.save(IMG_FULL_PATH)
+            img = cv2.imread(IMG_FULL_PATH)
             img_transform = cv2.cvtColor(cv2.resize(img,(128,128)),cv2.COLOR_BGR2GRAY)
             
             result = model.predict(img_transform.reshape(-1,128,128))
@@ -86,13 +86,13 @@ def home():
     return render_template("home.html")
 
 
-@app.route('/static/img/appimgs/<filename>', methods=['GET'])
-def send_image(filename):
-    return send_from_directory("static/img/appimgs", filename)
+# @app.route('/static/img/appimgs/<filename>', methods=['GET'])
+# def send_image(filename):
+#     return send_from_directory("static/img/appimgs", filename)
 
-@app.route('/static/img/classes/<filename>', methods=['GET'])
-def send_class_image(filename):
-    return send_from_directory("/static/img/classes", filename)
+# @app.route('/static/img/classes/<filename>', methods=['GET'])
+# def send_class_image(filename):
+#     return send_from_directory("/static/img/classes", filename)
 
 if __name__ == '__main__':
     app.run(debug=True)

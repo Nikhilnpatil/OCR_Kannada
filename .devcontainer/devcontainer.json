@@ -1,0 +1,19 @@
+{
+    "name": "kannada-ocr",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "mounts": [
+        {
+            "source": "kannada-ocr-build-cache",
+            "target": "/home/developer/.cache",
+            "type": "volume"
+        }
+    ],
+    "runArgs": [
+        "--net=host"
+    ],
+    "remoteUser": "developer",
+    "privileged": true,
+    "postCreateCommand": ". ./.devcontainer/postCreateCommand.sh"
+}
