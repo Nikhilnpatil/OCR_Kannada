@@ -9,4 +9,5 @@ sudo chown developer:developer ~/.cache
 echo ""
 pip install -r requirements.txt
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+python3 main.py
 printf "=====< \033[1;34m:: Exiting ::\033[0m >=====\n"
