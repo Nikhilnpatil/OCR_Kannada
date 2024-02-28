@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#Import required models
 from flask import Flask,render_template, request
 from app.utils.image import save_image,read_image
 from app.utils.prediction import get_kannada_prediction
