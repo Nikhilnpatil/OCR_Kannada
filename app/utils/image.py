@@ -25,4 +25,4 @@ def save_image(string64: str)->str:
     
 def read_image(path:str)->np.array:
     '''read_image(path) is a function that takes the path of the image and returns the data in the required format'''
-    return cv2.cvtColor(cv2.imread(path),cv2.COLOR_BGR2GRAY).reshape(-1,128,128) #model requires the reshaping
+    return (cv2.cvtColor(cv2.imread(path),cv2.COLOR_BGR2GRAY).reshape(-1,128,128)/255) #model requires the reshaping

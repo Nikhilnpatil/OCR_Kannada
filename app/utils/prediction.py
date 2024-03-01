@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 from app.kannada.characters import CHARACTERS
 
-model=tf.keras.models.load_model("app/models/finalmodel.h5")
+model=tf.keras.models.load_model("app/models/model2.h5")
 
 def get_kannada_prediction(data: np.array) -> str:
     '''get_kannada_prediction(data) takes the image data in the required format and returns the string of predicted character'''
